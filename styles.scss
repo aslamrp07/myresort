@@ -1,0 +1,30 @@
+// /* You can add global styles to this file, and also import other style files */
+
+// /* Importing Bootstrap SCSS file. */
+// @import '~bootstrap/scss/bootstrap';
+// @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+// // @import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+// // @import "../node_modules/@angular/material/prebuilt-themes/purple-green.css";
+// // @import "../node_modules/@angular/material/prebuilt-themes/pink-bluegray.css";
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* You can add global styles to this file, and also import other style files */
+@import "assets/theme/pro-theme.scss";
+@import "assets/theme/main.css";
+
+.snackbar-container {
+  background-color: #ffffff;
+  color: #212121;
+  word-break: break-word;
+  z-index: 999999;
+}
+
+.snackbar-container.success {
+  border: 3px solid #4caf50;
+}
+
+.snackbar-container.danger {
+  border: 3px solid #ea4335;
+}

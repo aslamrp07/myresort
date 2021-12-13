@@ -1,0 +1,198 @@
+<form
+  [id]="formId"
+  [formGroup]="form"
+  enctype="multipart/form-data"
+  (ngSubmit)="addRoom()"
+  novalidate
+>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="tab">
+    <div
+      fxLayout="row wrap"
+      fxLayoutGap="10px"
+      fxFlex="100%"
+      fxFlex.sm="50%"
+      fxLayout.lt-sm="column"
+      fxFlex.xs="100%"
+      fxLayoutAlign="flex-start"
+      style="margin: 20px"
+    >
+    <!-- <div>
+    <button color="primary"type="submit" mat-raised-button (click)="onAddRoom()">
+
+
+      <mat-icon >save</mat-icon>
+    </button>
+    </div> -->
+      <mat-form-field
+        fxFlex="0 1 calc(50% - 10px)"
+        fxFlex.lt-md="0 1 calc(50% - 10px)"
+        fxFlex.lt-sm="100%"
+        fxFlex.xs="100%"
+        appearance="fill"
+      >
+        <mat-label>Resort Name</mat-label>
+        <input
+          matInput
+          placeholder="Resort Name"
+          formControlName="resortName"
+          [matAutocomplete]="autoParts"
+          required
+        />
+        <mat-icon matSuffix>search</mat-icon>
+        <mat-autocomplete
+          #autoParts="matAutocomplete"
+          (optionSelected)="onSelectResort($event.option.value)"
+        >
+          <mat-option
+            *ngFor="let resort of filteredResort | async"
+            [value]="resort"
+          >
+            {{ resort.resortName }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error
+          *ngIf="resortName.invalid && (roomName.dirty || resortName.touched)"
+        >
+          <ng-container *ngIf="resortName.hasError('required')"
+            >Resort is required.</ng-container
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        fxFlex="0 1 calc(50% - 10px)"
+        fxFlex.lt-md="0 1 calc(50% - 10px)"
+        fxFlex.lt-sm="100%"
+        fxFlex.xs="100%"
+        appearance="fill"
+      >
+        <mat-label> Room Name </mat-label>
+        <textarea
+          matInput
+          type="text"
+          placeholder="Room Name"
+          formControlName="roomName"
+          rows="1"
+          required
+        ></textarea>
+        <mat-error
+          *ngIf="roomName.invalid && (roomName.dirty || roomName.touched)"
+        >
+          <ng-container *ngIf="roomName.hasError('required')"
+            >Room Name is required.</ng-container
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        fxFlex="0 1 calc(50% - 10px)"
+        fxFlex.lt-md="0 1 calc(50% - 10px)"
+        fxFlex.lt-sm="100%"
+        fxFlex.xs="100%"
+        appearance="fill"
+      >
+        <mat-label> Description </mat-label>
+        <textarea
+          matInput
+          type="text"
+          placeholder="Room Description"
+          formControlName="description"
+          rows="1"
+          required
+        ></textarea>
+        <mat-error
+          *ngIf="
+            description.invalid && (description.dirty || description.touched)
+          "
+        >
+          <ng-container *ngIf="description.hasError('required')"
+            >Description is required.</ng-container
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        fxFlex="0 1 calc(50% - 10px)"
+        fxFlex.lt-md="0 1 calc(50% - 10px)"
+        fxFlex.lt-sm="100%"
+        fxFlex.xs="100%"
+        appearance="fill"
+      >
+        <mat-label> Price</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)"
+          placeholder="Price"
+          formControlName="price"
+          required
+        />
+        <mat-error *ngIf="price.invalid && (price.dirty || price.touched)">
+          <ng-container *ngIf="price.hasError('required')"
+            >price is required.</ng-container
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <mat-checkbox
+        fxFlex="0 1 calc(95% - 10px)"
+        fxFlex.lt-md="0 1 calc(95% - 10px)"
+        fxFlex.lt-sm="100%"
+        fxFlex.xs="100%"
+        appearance="fill"
+        formControlName="isVatIncluded"
+        >VAT Included</mat-checkbox
+      >
+
+      <div style="width: 5%">
+        <button type="button" mat-mini-fab (click)="addroom()">
+          <mat-icon>add box</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<table
+  [hidden]="roomArr.length == 0"
+  style="
+    margin-top: 20px;
+    width: 50%;
+    text-align: center;
+    border: 1px solid #4caf50;
+    margin: 0 auto;
+  "
+>
+  <thead>
+    <th>Sl#</th>
+    <th>ResotName</th>
+    <th>RoomName</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>IsVatIncluded</th>
+    <th>Action</th>
+  </thead>
+  <tbody style="width: 80%; text-align: center">
+    <tr *ngFor="let item of roomArr; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ item?.resortName }}</td>
+      <td>{{ item?.roomName }}</td>
+      <td>{{ item?.description }}</td>
+      <td>{{ item?.price }}</td>
+      <td>{{ item?.isVatIncluded ? "Yes" : "No" }}</td>
+      <td>
+        <button (click)="deleteRoom(item, i)" mat-mini-fab color="primary">
+          <mat-icon>delete forever</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+ <!-- <div>
+    <button color="primary"type="submit" mat-raised-button (click)="onAddRoom()">
+
+
+      <mat-icon >save</mat-icon>
+    </button>
+    </div> -->

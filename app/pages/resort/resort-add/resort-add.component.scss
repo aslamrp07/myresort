@@ -1,0 +1,35 @@
+.example-section {
+  margin: 12px 0;
+}
+
+.example-margin {
+  margin: 0 12px;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}
+
+.matcheck {
+  margin-right: 15px;
+}
+.menudiv {
+
+    height: 100%;
+    width: 50%;
+    background-color: rgb(17, 200, 224);
+
+}
+
+.msavebtn {
+
+  display: flex;
+  width: 490px;
+  //position: absolute;
+  right: 0px;
+  margin-top: 25px;
+  margin-left: 50px;
+  align-items: flex-end;
+  //background-color: rgb(29, 4, 141);
+}

@@ -1,0 +1,76 @@
+<mat-form-field appearance="legacy" style="display: flex; justify-content: flex-end">
+  <mat-label>Search</mat-label>
+  <input matInput type="text" placeholder="Search" [formControl]="myControl" />
+</mat-form-field>
+<br />
+<ng-container>
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+    <div fxLayout="row wrap" fxLayoutGap="10px" fxFlex="100%" fxFlex.sm="50%" fxLayout.lt-sm="column" fxFlex.xs="100%"
+      fxLayoutAlign="flex-start">
+      <mat-card  color="primary" card *ngFor="let item of resortlist" fxFlex="0 4 calc(25% - 10px)" fxFlex.lt-md="0 4 calc(33.33% - 10px)"
+        fxFlex.lt-sm="50%" fxFlex.xs="50%" appearance="fill" class="pp" fxFlex="0 4 calc(25% - 10px)" >
+        <div style="width: 100%; display: flex; flex-direction: row"color="primary">
+          <div style="width: 90%">
+            <strong> Resort Name:&nbsp;{{ item.resortName }}</strong> <br />
+            Address:&nbsp;{{ item.address }} <br />
+            Phone:&nbsp;{{ item.cellNo }} <br />
+            Email:&nbsp; <i> {{ item.email }} </i>
+
+            <div style="width: 10%; display: flex; flex-direction: row" class="button-group" >
+              <button mat-icon-button class="btt-service" *ngIf="item.isBreakfastExist">
+                <i class="material-icons" matTooltip="Break Fast" style="font-size: 17px !important">
+                  free_breakfast</i>
+              </button>
+
+              <button mat-icon-button class="btt-service" *ngIf="item.isWifiExist">
+                <i class="material-icons" matTooltip="wifi" style="font-size: 17px !important">
+                  wifi</i>
+              </button>
+
+              <button mat-icon-button class="btt-service" *ngIf="item.isBBQExist">
+                <i class="material-icons" matTooltip="BBQ" style="font-size: 17px !important">
+                  outdoor_grill</i>
+              </button>
+
+              <button mat-icon-button class="btt-service" *ngIf="item.isLaundryExist">
+                <i class="material-icons" matTooltip="Laundry" style="font-size: 17px !important">
+                  iron</i>
+              </button>
+
+              <button mat-icon-button class="btt-service" *ngIf="item.isParkingExist">
+                <i class="material-icons" matTooltip="Parking" style="font-size: 17px !important">
+                  local_parking</i>
+              </button>
+
+              <button mat-icon-button class="btt-service" *ngIf="item.isOutdoorPoolExist">
+                <i class="material-icons" matTooltip="Pool" style="font-size: 17px !important">
+                  pool</i>
+              </button>
+            </div>
+          </div>
+
+          <div style="width: 10%; display: flex; flex-direction: column" class="button-group">
+            <button mat-icon-button class="btt">
+              <i class="material-icons" routerLink="/resort/details/{{ item._id }}" matTooltip="Details"
+                style="font-size: 17px !important">
+                double_arrow</i>
+            </button>
+            <button mat-icon-button class="btt">
+              <i class="material-icons" [routerLink]="['/item/edit', item._id]" matTooltip="Edit"
+                style="font-size: 17px !important">
+                edit
+              </i>
+            </button>
+            <button mat-icon-button class="btt">
+              <i class="material-icons" (click)="deleteResort(item._id)" matTooltip="Delete"
+                style="font-size: 17px !important">
+                delete
+              </i>
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <mat-paginator [length]="totalRecords" [pageSizeOptions]="[8, 25, 50, 100]"></mat-paginator>
+</ng-container>

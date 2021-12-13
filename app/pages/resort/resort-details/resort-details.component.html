@@ -1,0 +1,72 @@
+<div fxLayout="row" fxLayoutAlign="space-evenly start" *ngIf="resort?._id">
+  <div fxFlex="50">
+    <div
+      fxFlex="100"
+      class="example-card"
+      style="height: 355px; overflow-y: auto"
+    >
+      <div style="background: #673ab7">
+        <h2>Resort Information</h2>
+      </div>
+      <mat-list>
+        <mat-list-item> Resort Name : {{ resort?.resortName }} </mat-list-item>
+        <mat-list-item> Address : {{ resort?.address }} </mat-list-item>
+        <mat-list-item> Phone : {{ resort?.cellNo }} </mat-list-item>
+        <mat-list-item> Email : {{ resort?.email }} </mat-list-item>
+        <mat-list-item>
+          Wifi : {{ resort.isWifiExist ? "Yes" : "No" }}
+        </mat-list-item>
+        <mat-list-item>
+          BBQ : {{ resort.isBBQExist ? "Yes" : "No" }}
+        </mat-list-item>
+        <mat-list-item>
+          Free Break Fast : {{ resort.isBreakfastExist ? "Yes" : "No" }}
+        </mat-list-item>
+        <mat-list-item>
+          Laundry Service : {{ resort.isLaundryExist ? "Yes" : "No" }}
+        </mat-list-item>
+        <mat-list-item>
+          Swiming Pool : {{ resort.isOutdoorPoolExist ? "Yes" : "No" }}
+        </mat-list-item>
+        <mat-list-item>
+          Parking: {{ resort.isParkingExist ? "Yes" : "No" }}
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <div fxFlex="40">
+    <div
+      fxFlex="100"
+      class="example-card"
+      style="height: 380px; overflow-y: auto; flex-direction: column"
+    >
+      <div style="background: #673ab7">
+        <h2>Total Room:</h2>
+      </div>
+      <ng-container>
+        <mat-card
+          fxFlex="0 1 calc(25% - 10px)"
+          fxFlex.lt-md="0 1 calc(33.33% - 10px)"
+          fxFlex.lt-sm="50%"
+          fxFlex.xs="50%"
+          appearance="fill"
+          class="pp"
+        >
+          <mat-card-header>
+            <mat-card-subtitle style="color: black">
+              Room Name:&nbsp; <br />
+
+              <span>Rent Rate: &nbsp;</span><br />
+            </mat-card-subtitle>
+            <mat-card-actions>
+              <button mat-raised-button color="primary">Move</button>
+            </mat-card-actions>
+          </mat-card-header>
+        </mat-card>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <mat-label style="text-align: center"> </mat-label>
+      </ng-template>
+    </div>
+  </div>
+</div>
